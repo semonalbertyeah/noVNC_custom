@@ -178,7 +178,16 @@
     }
 
     window.onscriptsload = function () {
-        var host, port, password, path, token;
+        /*
+            host, port: websocket server
+            password: vnc target host password
+            token: pointed to vnc target host
+            path: websockify gets token from querystring of path
+        */
+        var host, port,
+            path = $path,
+            token = $token,
+            password = $password;
 
         $D('sendCtrlAltDelButton').style.display = "inline";
         $D('sendCtrlAltDelButton').onclick = sendCtrlAltDel;
@@ -187,7 +196,6 @@
         $D('xvpResetButton').onclick = xvpReset;
 
         WebUtil.init_logging(WebUtil.getConfigVar('logging', 'warn'));
-        //document.title = unescape(WebUtil.getConfigVar('title', 'noVNC'));
         document.title = unescape(WebUtil.getConfigVar('title', 'fronware'));
         // By default, use the host and port of server that served this file
         host = WebUtil.getConfigVar('host', window.location.hostname);
@@ -204,12 +212,8 @@
             }
         }
 
-        password = WebUtil.getConfigVar('password', '');
-        path = WebUtil.getConfigVar('path', 'websockify');
-
         // If a token variable is passed in, set the parameter in a cookie.
         // This is used by nova-novncproxy.
-        token = WebUtil.getConfigVar('token', null);
         if (token) {
 
             // if token is already present in the path we should use it
@@ -243,6 +247,7 @@
 
         rfb.connect(host, port, password, path);
     };
+    
     </script>
 
     </body>
