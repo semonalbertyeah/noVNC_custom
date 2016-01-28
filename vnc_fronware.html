@@ -96,6 +96,17 @@
             if (innerW !== undefined && innerH !== undefined)
                 rfb.setDesktopSize(innerW, innerH - controlbarH - padding);
         }
+
+        /* canvas scale */
+        var container = $D('noVNC_screen');
+        var status_bar = $D('noVNC_status_bar');
+        var new_width = container.clientWidth;
+        var new_height = container.clientHeight - (status_bar.offsetHeight || status_bar.scrollHeight);
+
+        console.log('new_width:', new_width);
+        console.log('new_height:', new_height);
+
+        rfb._display.autoscale(new_width, new_height);
     }
     function FBUComplete(rfb, fbu) {
         UIresize();
