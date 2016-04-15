@@ -98,15 +98,16 @@
         }
 
         /* canvas scale */
-        // var container = $D('noVNC_screen');
-        // var status_bar = $D('noVNC_status_bar');
-        // var new_width = container.clientWidth;
-        // var new_height = container.clientHeight - (status_bar.offsetHeight || status_bar.scrollHeight);
+        var container = $D('noVNC_screen');
+        var status_bar = $D('noVNC_status_bar');
+        var new_width = container.clientWidth;
+        var new_height = container.clientHeight - (status_bar.offsetHeight || status_bar.scrollHeight);
 
-        // console.log('new_width:', new_width);
-        // console.log('new_height:', new_height);
+        console.log('new_width:', new_width);
+        console.log('new_height:', new_height);
 
-        // rfb._display.autoscale(new_width, new_height);
+        var scaleRatio = rfb.get_display().autoscale(new_width, new_height);
+        rfb.get_mouse().set_scale(scaleRatio);
     }
     function FBUComplete(rfb, fbu) {
         UIresize();
@@ -256,6 +257,11 @@
             updateState(null, 'fatal', null, 'Unable to create RFB client -- ' + exc);
             return; // don't continue trying to connect
         }
+
+        console.log('readSetting resize:', WebUtil.readSetting('resize'));
+        console.log('writeSetting');    // debug
+        WebUtil.writeSetting('resize', 'scale');
+        console.log('readSetting resize:', WebUtil.readSetting('resize'));
 
         rfb.connect(host, port, password, path);
     };
