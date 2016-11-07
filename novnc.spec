@@ -1,22 +1,22 @@
-Name:           novnc
-Version:        0.5.1
-Release:        4%{?dist}
+%define name novnc
+%define version 0.5.1
+%define release 4
+
+Name:           %{name}
+Version:        %{version}
+Release:        %{release}
 Summary:        VNC client using HTML5 (Web Sockets, Canvas) with encryption support
 #Requires:       python-websockify
-
 License:        GPLv3
 URL:            https://github.com/kanaka/noVNC
-Source0:        novnc-%{version}.tar.gz
-
-
+Source0:        %{name}-%{version}.tar.gz
 BuildArch:      noarch
-BuildRequires:  python2-devel
 
 %description
 Websocket implementation of VNC client
 
 %prep
-%setup -q -n novnc-%{version}
+%setup -q -n %{name}-%{version}
 
 
 %build

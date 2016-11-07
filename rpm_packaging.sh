@@ -32,6 +32,6 @@ mv ${name}-${ver}.tar.gz ~/rpmbuild/SOURCES
 mv ${name}.spec ~/rpmbuild/SPECS/
 rpmbuild -bb ~/rpmbuild/SPECS/${name}.spec
 
-mv ~/rpmbuild/RPMS/noarch/${name}-${ver}-${release}.*noarch.rpm dist
+mv ~/rpmbuild/RPMS/noarch/${name}-${ver}-${release}.noarch.rpm dist
 
 
